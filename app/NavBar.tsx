@@ -14,7 +14,7 @@ const NavBar = () => {
   const currentPath = usePathname();
 
   return (
-    <nav className="flex space-x-6 border-b px-6 mb-5 h-14 items-center">
+    <nav className="flex space-x-6 border-b px-6 h-14 items-center">
       <Link href="/">
         <AiTwotoneBug size={24} />
       </Link>
