@@ -1,13 +1,12 @@
-import { Skeleton, Table } from "@radix-ui/themes";
+import { Box, Skeleton, Table } from "@radix-ui/themes";
 import React from "react";
-import FlexSkeleton from "../components/FlexSkeleton";
 import IssueActions from "./IssueActions";
 
 const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5];
 
   return (
-    <div className="space-y-5">
+    <Box className="space-y-5 max-w-xl">
       <IssueActions />
       <Table.Root variant="surface" size="3">
         <Table.Header>
@@ -21,19 +20,19 @@ const LoadingIssuesPage = () => {
           {issues.map((issue) => (
             <Table.Row key={issue}>
               <Table.Cell>
-                <FlexSkeleton />
+                <Skeleton width="5rem" />
               </Table.Cell>
               <Table.Cell>
-                <FlexSkeleton />
+                <Skeleton width="5rem" />
               </Table.Cell>
               <Table.Cell>
-                <FlexSkeleton />
+                <Skeleton width="5rem" />
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table.Root>
-    </div>
+    </Box>
   );
 };
 
