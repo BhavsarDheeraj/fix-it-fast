@@ -1,4 +1,5 @@
-import { TrashIcon } from "@radix-ui/react-icons";
+"use client";
+
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 
 const DeleteIssueButton = ({ id }: { id: string }) => {
@@ -18,7 +19,11 @@ const DeleteIssueButton = ({ id }: { id: string }) => {
             <Button variant="soft">Cancel</Button>
           </AlertDialog.Cancel>
           <AlertDialog.Action>
-            <Button variant="solid" color="red">
+            <Button
+              variant="solid"
+              color="red"
+              onClick={() => console.log("Delete Issue")}
+            >
               Delete Issue
             </Button>
           </AlertDialog.Action>
