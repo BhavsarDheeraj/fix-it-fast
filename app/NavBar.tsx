@@ -8,7 +8,7 @@ import { AiTwotoneBug } from "react-icons/ai";
 const NavBar = () => {
   const links = [
     { label: "Dashboard", href: "/" },
-    { label: "Issues", href: "/issues" },
+    { label: "Issues", href: "/issues/list" },
   ];
 
   const currentPath = usePathname();
