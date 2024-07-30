@@ -1,6 +1,8 @@
 "use client";
 
+import { Box, Spinner } from "@radix-ui/themes";
 import classNames from "classnames";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiTwotoneBug } from "react-icons/ai";
@@ -12,6 +14,7 @@ const NavBar = () => {
   ];
 
   const currentPath = usePathname();
+  const { status, data: session } = useSession();
 
   return (
     <nav className="flex space-x-6 border-b px-6 h-14 items-center">
@@ -34,6 +37,15 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
+      <Box>
+        {status === "authenticated" && (
+          <Link href="/api/auth/signout">Logout</Link>
+        )}
+        {status === "unauthenticated" && (
+          <Link href="/api/auth/signin">Login</Link>
+        )}
+        {status === "loading" && <Spinner loading />}
+      </Box>
     </nav>
   );
 };
