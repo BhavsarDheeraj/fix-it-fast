@@ -20,6 +20,9 @@ model Issue {
   status      IssueStatus @default(OPEN)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+
+  assignedToUserId String? @db.VarChar(255)
+  assignedToUser   User?   @relation(fields: [assignedToUserId], references: [id])
 }
 
 enum IssueStatus {
@@ -39,11 +42,13 @@ model User {
   Account       Account?
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+
+  assignedIssues Issue[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model Account {
   id                       String  @id @default(cuid())
   userId                   String  @unique
@@ -59,32 +64,32 @@ model Account {
   session_state            String?
   refresh_token_expires_in Int?
   user                     User?   @relation(fields: [userId], references: [id])
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
- 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id])
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   @@index([userId])
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
 }
 
@@ -98,8 +103,8 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([userId, credentialID])
 }
