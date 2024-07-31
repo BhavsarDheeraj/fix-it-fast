@@ -74,9 +74,9 @@ const AuthStatus = () => {
 
   return (
     <Box>
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
-          <Skeleton loading={status === "loading"}>
+      <Skeleton loading={status === "loading"}>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
             <Avatar
               src={session?.user?.image ?? undefined}
               fallback="?"
@@ -84,17 +84,17 @@ const AuthStatus = () => {
               radius="full"
               className="cursor-pointer"
             />
-          </Skeleton>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Label>
-            <Text size="2">{session?.user?.email ?? ""}</Text>
-          </DropdownMenu.Label>
-          <DropdownMenu.Item>
-            <Link href="/api/auth/signout">Logout</Link>
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Label>
+              <Text size="2">{session?.user?.email ?? ""}</Text>
+            </DropdownMenu.Label>
+            <DropdownMenu.Item>
+              <Link href="/api/auth/signout">Logout</Link>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+      </Skeleton>
     </Box>
   );
 };
