@@ -5,6 +5,7 @@ import Pagination from "@/app/components/Pagination";
 import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 import { Flex } from "@radix-ui/themes";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 interface Props {
   searchParams: IssueQuery;
@@ -39,11 +40,13 @@ const IssuesPage = async ({ searchParams }: Props) => {
     <Flex direction="column" gap="3">
       <IssueActions />
       <IssueTable searchParams={searchParams} issues={issues} />
-      <Pagination
-        currentPage={page}
-        itemCount={issueCount}
-        pageSize={pageSize}
-      />
+      <Suspense>
+        <Pagination
+          currentPage={page}
+          itemCount={issueCount}
+          pageSize={pageSize}
+        />
+      </Suspense>
     </Flex>
   );
 };
