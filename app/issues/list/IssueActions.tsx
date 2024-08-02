@@ -11,7 +11,9 @@ const IssueActions = () => {
         <Suspense>
           <IssueStatusFilter />
         </Suspense>
-        <IssueAssignedToFilter />
+        <Suspense>
+          <IssueAssignedToFilter />
+        </Suspense>
       </Flex>
       <Button>
         <Link href="/issues/new">New Issue</Link>

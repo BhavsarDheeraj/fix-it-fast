@@ -8,8 +8,6 @@ import { useUsers } from "../[id]/AssigneeSelect";
 const IssueAssignedToFilter = () => {
   const { data: users, error, isLoading } = useUsers();
 
-  if (error) return null;
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -18,6 +16,8 @@ const IssueAssignedToFilter = () => {
     if (userId === null) return undefined;
     else return userId;
   };
+
+  if (error) return null;
 
   return (
     <Select.Root
