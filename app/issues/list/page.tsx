@@ -18,7 +18,14 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
-  const where = { status };
+  const assignedToUserId =
+    searchParams.assignedToUserId !== "all"
+      ? searchParams.assignedToUserId === "unassigned"
+        ? null
+        : searchParams.assignedToUserId
+      : undefined;
+
+  const where = { status, assignedToUserId };
 
   const orderBy = columnNames.includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: "asc" }
@@ -29,7 +36,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
   const issues = await prisma.issue.findMany({
     where,
-    orderBy,
+    orderBy: orderBy ?? { createdAt: "desc" },
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
