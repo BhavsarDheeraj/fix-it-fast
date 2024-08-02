@@ -3,6 +3,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Container,
   DropdownMenu,
   Flex,
@@ -10,7 +11,7 @@ import {
   Text,
 } from "@radix-ui/themes";
 import classNames from "classnames";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiTwotoneBug } from "react-icons/ai";
@@ -67,9 +68,9 @@ const AuthStatus = () => {
 
   if (status === "unauthenticated")
     return (
-      <Link className="nav-link" href="/api/auth/signin">
+      <Button variant="surface" onClick={() => signIn("google")}>
         Login
-      </Link>
+      </Button>
     );
 
   return (
@@ -89,8 +90,8 @@ const AuthStatus = () => {
             <DropdownMenu.Label>
               <Text size="2">{session?.user?.email ?? ""}</Text>
             </DropdownMenu.Label>
-            <DropdownMenu.Item>
-              <Link href="/api/auth/signout">Logout</Link>
+            <DropdownMenu.Item onClick={() => signOut()}>
+              Logout
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
